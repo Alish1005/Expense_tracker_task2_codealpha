@@ -1,0 +1,24 @@
+.Inputbar{
+    border: solid 2px  #e0e0e0;
+    padding: 20px 0 60px 0;
+    border-radius: 20px;
+    display: inline;
+    text-align: center !important;
+    position: relative;
+}
+.Inputbar .MuiFormControl-root{
+    margin: 15px 0;
+}
+.Inputbar input{
+    display: block;
+    align-self: center;
+    padding: 2px;
+    margin: 12px 5px;
+}
+.Inputbar button{
+    position: absolute;
+    border-radius: 50%;
+    padding: 9px;
+    bottom: -20px;
+    right: 45%;
+}

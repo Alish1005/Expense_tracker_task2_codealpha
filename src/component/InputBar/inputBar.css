@@ -1,6 +1,7 @@
 .Inputbar{
     border: solid 2px  #e0e0e0;
     padding: 20px 0 60px 0;
+    margin-right: 0 !important;
     border-radius: 20px;
     display: inline;
     text-align: center !important;

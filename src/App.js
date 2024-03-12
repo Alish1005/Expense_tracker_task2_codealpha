@@ -27,7 +27,6 @@ function App()
     {
       setData(d)
     }
-    console.log(d.map(item => item.date))
   }
   useEffect(() =>
   {
@@ -35,10 +34,31 @@ function App()
   }, [])
   useEffect(() =>
   {
-    data.forEach(element =>
-    {
+    // Create an empty object to store sums for each date
+    let sumsByDate = [];
 
-    });
+    // Iterate through the list of objects
+    for (let obj of data)
+    {
+      // Extract price and date from each object
+      let { price, date } = obj;
+
+      // If the date already exists in the sumsByDate object, add the price to it
+      // Otherwise, initialize it with the current price
+
+      if (sumsByDate.filter(i => format(obj.date, "dd/MM/yyyy") == i.date).length > 0)
+      {
+        var i = sumsByDate.indexOf(sumsByDate.filter(o => o.date == format(obj.date, "dd/MM/yyyy"))[0]);
+        console.log("<<<<<<<<<<<<<<<<<<<<", i)
+        sumsByDate[i].total += price;
+      }
+
+      else
+      {
+        sumsByDate = [...sumsByDate, { "total": price, "date": format(date, "dd/MM/yyyy") }]
+      }
+    }
+    setDates(sumsByDate);
   }, [data])
   const EditRow = (id) =>
   {
@@ -95,7 +115,7 @@ function App()
         <h1 className='display-4'>Expense Tracker</h1>
         <InputBar setData={setData} data={data} />
         <DataTable columns={DefaultColumns} row={data} />
-        <LineCharts data={data.map((item) => ({ id: item.id, price: item.price, date: format(new Date(item.date), 'dd/MM/yyy') }))} xkey="date" datakey="price" />
+        <LineCharts data={dates.slice(-30)} xkey="date" datakey="total" title='Total Expenses' />
       </Router>
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,3 +1,4 @@
+import "./lindechart.css"
 import
 {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, AreaChart, Area, ResponsiveContainer, Label
@@ -5,7 +6,7 @@ import
 function LineCharts(props)
 {
   return (
-    <ResponsiveContainer width={"100%"} height={300}>
+    <ResponsiveContainer className={"mb-4 linechart shadow-sm"} width={"95%"} height={400}>
       <LineChart
         width={500}
         height={200}

@@ -6,6 +6,8 @@
     display: inline;
     text-align: center !important;
     position: relative;
+    background-color: #202E63;
+    height: 100%;
 }
 .Inputbar .MuiFormControl-root{
     margin: 15px 0;
@@ -15,6 +17,7 @@
     align-self: center;
     padding: 2px;
     margin: 12px 5px;
+    color: #81afff;
 }
 .Inputbar button{
     position: absolute;

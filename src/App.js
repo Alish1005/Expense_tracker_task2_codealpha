@@ -19,6 +19,7 @@ function App()
   const [price, setPrice] = useState(0)
   const [date, setDate] = useState(null)
   const [dates, setDates] = useState([]);
+  const [monthes, setMonthes] = useState([]);
 
   const refresh = () =>
   {
@@ -49,7 +50,6 @@ function App()
       if (sumsByDate.filter(i => format(obj.date, "dd/MM/yyyy") == i.date).length > 0)
       {
         var i = sumsByDate.indexOf(sumsByDate.filter(o => o.date == format(obj.date, "dd/MM/yyyy"))[0]);
-        console.log("<<<<<<<<<<<<<<<<<<<<", i)
         sumsByDate[i].total += price;
       }
 
@@ -59,20 +59,46 @@ function App()
       }
     }
     setDates(sumsByDate);
+
+    // Create an empty object to store sums for each date
+    let sumsByMonthes = [];
+
+    // Iterate through the list of objects
+    for (let obj of data)
+    {
+      // Extract price and date from each object
+      let { price, date } = obj;
+
+      // If the date already exists in the sumsByDate object, add the price to it
+      // Otherwise, initialize it with the current price
+
+      if (sumsByMonthes.filter(i => format(obj.date, "MMMM") == i.month).length > 0)
+      {
+        var i = sumsByMonthes.indexOf(sumsByMonthes.filter(o => o.month == format(obj.date, "MMMM"))[0]);
+        console.log("<<<<<<<<<<<<<<<<<<<<", i)
+        sumsByMonthes[i].total += price;
+      }
+
+      else
+      {
+        sumsByMonthes = [...sumsByMonthes, { "total": price, "month": format(date, "MMMM") }]
+      }
+    }
+    setMonthes(sumsByMonthes);
   }, [data])
   const EditRow = (id) =>
   {
     let d = data.filter(item => item.id == id);
     setId(id);
     setTitle(d[0]['title'])
-    setDesc(d[0]['descreption'])
+    setDesc(d[0]['description'])
     setPrice(d[0]['price'])
     setDate(d[0]['date'])
   }
   const ChangeEdit = () =>
   {
     const ind = data.map((i, index) => { return ({ "index": index, "id": i.id }) }).filter((i) => i.id == id)[0].index;
-    const d = { id: id, title: title, descreption: desc, price: price, date: date }
+    const d = { id: id, title: title, description: desc, price: price, date: date }
     const noti = data.filter((item, index) => index < ind);
     const noti2 = data.filter((item, index) => index > ind);
     const all = [...noti, d, ...noti2];
@@ -89,7 +115,7 @@ function App()
   const DefaultColumns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "title", type: "string", headerName: "Title", width: 120, },
-    { field: "descreption", type: "string", headerName: "Descreption", width: 200, },
+    { field: "description", type: "string", headerName: "description", width: 200, },
     { field: "price", headerName: "price", width: 80, type: "number", },
     { field: "date", headerName: "Date", renderCell: (params) => (<div>{format(new Date(params.value), 'dd/MM/yyy')}</div>), width: 110, type: "Date", },
     {
@@ -115,7 +141,10 @@ function App()
         <h1 className='display-4'>Expense Tracker</h1>
         <InputBar setData={setData} data={data} />
         <DataTable columns={DefaultColumns} row={data} />
-        <LineCharts data={dates.slice(-30)} xkey="date" datakey="total" title='Total Expenses' />
+        <h5 className='mt-4'>Daily Total Expense</h5>
+        <LineCharts data={dates.sort(o => o['date']).slice(-30)} xkey="date" datakey="total" title='Total Expenses' />
+        <h5 className='mt-4'>Monthly Total Expense</h5>
+        <LineCharts data={monthes.slice(-30)} xkey="month" datakey="total" title='Total Expenses' />
       </Router>
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,7 +156,7 @@ function App()
             </div>
             <div class="modal-body">
               <TextField className='mt-3' onChange={(e) => setTitle(e.target.value)} value={title} id="outlined-basic" label="Title" variant="outlined" /><br />
-              <TextField className='mt-3' onChange={(e) => setDesc(e.target.value)} value={desc} id="outlined-basic" label="Descreption" variant="outlined" /><br />
+              <TextField className='mt-3' onChange={(e) => setDesc(e.target.value)} value={desc} id="outlined-basic" label="description" variant="outlined" /><br />
               <TextField className='mt-3' onChange={(e) => setPrice(e.target.value)} value={price} /*error helperText="Require*"*/ id="outlined-error" label="price" variant="outlined" /><br />
             </div>
             <div class="modal-footer">

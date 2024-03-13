@@ -21,7 +21,7 @@ function DataTable(props)
     <div className="datatable overflow-y justify-self-center mt-5" style={{ width: "fit-content", height: "80vh", marginLeft: "5%" }}>
       <DataGrid
         //autoHeight
-        className="dataGrid"
+        className="dataGrid shadow"
         rows={props.row}
         columns={props.columns}
         /*columns={[...props.columns,actionColumn]}*///where actionColumn is the same of that on the normal managment pages

@@ -35,8 +35,8 @@ function InputBar(props)
     }
     return (
         <div className="Inputbar col-md-3 col-lg-3 m-5 shadow-lg">
-            {EditData == null ? <span className='h5 m-5'>Add Expense</span> : <span className='h5 m-5'>Edit Data</span>}
-            <TextField onChange={(e) => setTitle(e.target.value)} value={title} id="outlined-basic" label="Title" variant="outlined" />
+            {EditData == null ? <span className='h5 m-5 text-primary'>Add Expense</span> : <span className='h5 m-5'>Edit Data</span>}
+            <TextField onChange={(e) => setTitle(e.target.value)} className='text-secondary' value={title} id="outlined-basic" label="Title" variant="outlined" />
             <TextField onChange={(e) => setDesc(e.target.value)} value={desc} id="outlined-basic" label="description" variant="outlined" />
             <TextField onChange={(e) => setPrice(e.target.value)} value={price} /*error helperText="Require*"*/ id="outlined-basic" label="price" variant="outlined" />
             <button type="button" className='btn btn-success' title='Add Expense' onClick={add}><AddIcon /></button>

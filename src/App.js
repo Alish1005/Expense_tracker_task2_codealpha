@@ -33,7 +33,6 @@ function App()
   {
     // Create an empty object to store sums for each date
     let sumsByDate = [];
-
     // Iterate through the list of objects
     for (let obj of data)
     {

@@ -31,10 +31,6 @@ function App()
   }
   useEffect(() =>
   {
-    refresh()
-  }, [])
-  useEffect(() =>
-  {
     // Create an empty object to store sums for each date
     let sumsByDate = [];
 

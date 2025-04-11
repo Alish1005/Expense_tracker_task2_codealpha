@@ -1,12 +1,12 @@
 .Inputbar{
-    border: solid 2px  #e0e0e0;
+    border: solid 2px  #00a2ff;
     padding: 20px 0 60px 0;
     margin-right: 0 !important;
     border-radius: 20px;
     display: inline;
     text-align: center !important;
     position: relative;
-    background-color: #202E63;
+    background-color: #ffffff;
     height: 100%;
 }
 

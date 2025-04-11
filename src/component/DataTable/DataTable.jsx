@@ -39,7 +39,7 @@ function DataTable(props)
             quickFilterProps: { debounceMs: 500 },
           },
         }}
-        loading={loading}
+        //loading={loading}
         //pageSizeOptions={[5, 10,20,30]}
         checkboxSelection
         //disableColumnFilter
